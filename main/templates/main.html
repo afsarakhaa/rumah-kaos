@@ -1,10 +1,52 @@
-<h1>Selamat Datang di Rumah Kaos!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Kaos</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+        }
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
+        h1 {
+            text-align: center;
+        }
 
-<h5>Amount: </h5>
-<p>{{ amount }}<p>
+        .product-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-<h5>Description: </h5>
-<p>{{ description }}</p>
+        }
+
+        .product-details {
+            margin-left: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: large;
+        }
+
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selamat Datang di Rumah Kaos!</h1>
+    <div class="product-info">
+        <img src="https://cdn.istyle.im/images/product/web/37/09/76/00/0/000000760937_01_800.png" alt="Kaos ADLV" width="350">
+        <div class="product-details">
+            <h5>Name:</h5>
+            <p>{{ name }}</p>
+
+            <h5>Amount:</h5>
+            <p>{{ amount }}</p>
+
+            <h5>Description:</h5>
+            <p>{{ description }}</p>
+        </div>
+    </div>
+    
+</body>
+</html>
