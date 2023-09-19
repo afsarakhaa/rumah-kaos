@@ -11,8 +11,11 @@ from django.core import serializers
 def show_main(request):
     products = Product.objects.all()
     context = {
+        'name': 'Acme De La Vie Baby Face Donut',
+        'price': 'Rp850.000,00',
+        'description': 'Kaos Acme De La Vie adalah kaos yang biasa dipakai oleh Koko-Koko di PIK',
         'image_url' : 'https://cdn.istyle.im/images/product/web/37/09/76/00/0/000000760937_01_800.png',
-        'products' : products
+        'products' : products,
 
     }
 
