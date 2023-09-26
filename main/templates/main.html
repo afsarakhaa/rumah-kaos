@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumah Kaos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CSS -->
 
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
-            
         }
-
+        
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -39,24 +39,31 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }
-        
-        .product-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            border-radius: 50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border-radius: 50px;
+            box-shadow: 2px 7px 25px rgba(0, 0, 0, 0.1);
+        }
 
         .product-details {
-            margin-left: 20px;
+            margin-top: 20px;
+            text-align: center;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: large;
+        }
+
+        .product-image {
+            max-width: 500px;
+            background-color: transparent;
         }
 
         table {
@@ -65,97 +72,184 @@
             margin-bottom: 20px;
         }
 
-        /* Styling header tabel */
+        /* Styling header table */
         th {
-            background-color: #f2f2f2;
+            background-color: #008CBA; 
+            color: #fff; /* Header text color */
             text-align: left;
-            padding: 8px;
+            padding: 12px;
+            border-bottom: 2px solid #005f7f; 
         }
 
-        /* Styling sel pada tabel */
+        /* Styling cells in the table */
         td {
-            padding: 8px;
+            padding: 12px;
             border-bottom: 1px solid #ddd;
         }
 
-        /* Styling the "Add New Product Button"*/
+        /* Alternate row background color */
+        tr:nth-child(even) {
+            background-color: #f2f2f2; 
+        }
+
+        /* Styling the "Add New Product Button" */
         .center-button {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 10px;
-            
+            margin-top: 20px; 
         }
 
         .rounded-button {
             background-color: #008CBA;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px; 
             cursor: pointer;
-            border-radius: 15px; 
-            text-decoration: none; 
-            
+            border-radius: 25px; 
+            text-decoration: none;
         }
 
-        /* Efek Hover pada bagian button*/
-        .rounded-button:hover { 
+        /* Hover effect on the button */
+        .rounded-button:hover {
             background-color: #005f7f;
         }
+
+        .last-login {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .logout-button {
+            display: block;
+            margin: 10px auto; /* Mengurangi margin agar tombol lebih dekat dengan teks "Sesi Terakhir" */
+            background-color: #E74C3C; /* Warna latar belakang sesuai keinginan Anda */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Efek hover */
+            text-decoration: none;
+            width: fit-content; 
+    }
+
+        /* Hover effect on the Logout Button */
+        .logout-button:hover {
+            background-color: #C0392B; /* Warna latar belakang saat hover */
+        }
+        /* Styling for the custom buttons */
+        .custom-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .custom-button:hover {
+            background-color: #005f7f;
+        }
+
+    
         
     </style>
 </head>
 
 <body>
-    <h1>Selamat Datang di Rumah Kaos!</h1>
-    <h2> Katalog Kami</h2>
+    <h1>Selamat Datang {{name}} di Rumah Kaos</h1>
+    <h2>Katalog Kami</h2>
     <br>
-    <div class="container"></div>
-            <div class="product-info">
-                <img src="{{ image_url }}" alt="{{ product.name }}" width="300">
-                <div class="product-details">
+    <div class="container">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-details">
 
-                    <h5>Name:</h5>
-                    <p>{{ name }}</p>
-
-                    <h5>Price:</h5>
-                    <p>{{ price }}</p>
-
-                    <h5>Description:</h5>
-                    <p>{{ description }}</p>
-
+                <div class="product-image">
+                    <img src="{{ product.link_image }}" alt="{{ product.name }}" width="300">
                 </div>
+
+                <p>{{ product.name }}</p>
+                <p>IDR {{ product.price }}</p>
+                <p>Stock: {{ product.amounts }}</p>
+                <div class="warning" style="font-weight: bold;">
+                    <p>{{ product.description }}</p>
+                </div>
+
             </div>
+        </div>
+        {% endfor %}
     </div>
 
-    <br />
-
-    <h3> Terdapat {{jumlah_produk}} Produk saat ini </h3>
+    <h3>Terdapat {{ jumlah_produk }} katalog produk saat ini</h3>
 
     <table>
         <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Tambah dan Kurang</th>
+            <th>Amounts</th>
             <th>Description</th>
             <th>Date Added</th>
+            <th>Delete</th>
         </tr>
-    
+
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-    
+
         {% for product in products %}
-            <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
-            </tr>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+                <div style="display: flex; align-items: center; margin-right: ;">
+                    <form method="POST" action="{% url 'main:tambah_amount' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="custom-button" title="Tambah">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                    </form>
+                    <br>
+                    <form method="POST" action="{% url 'main:kurang_amount' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="custom-button" title="Kurangi">
+                            <i class="fas fa-minus-circle"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+            <td style="display: flex; justify-content: center; margin-top: 22px ;">{{ product.amounts }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_added }}</td>
+            <td>
+                <form method="POST" action="{% url 'main:delete_product' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="custom-button" title="Hapus">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
         {% endfor %}
     </table>
-    
-    <br />
-    
+
     <div class="center-button">
         <a href="{% url 'main:create_product' %}" class="rounded-button">Tambahkan Produk</a>
+    </div>
+    <br>
+
+    <h5 class="last-login">Sesi terakhir login: {{ last_login }}</h5>
+    <div class="center-button">
+        <a href="{% url 'main:logout' %}" class="logout-button">Logout</a>
     </div>
 
 </body>
