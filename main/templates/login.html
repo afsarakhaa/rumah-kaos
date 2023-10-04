@@ -38,11 +38,11 @@
     }
 
     .form-control {
-        width: 100%;
+        width: 95%;
         padding: 10px;
         margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        border: 2px solid #ccc;
+        border-radius: 15px;
         font-size: 16px;
     }
 
@@ -57,8 +57,9 @@
         font-size: 16px;
         transition: background-color 0.3s ease;
         margin-bottom: 20px;
-        margin-right: 80px;
+        margin-right: 70px;
         margin-top: 10px;
+        font-weight: bold;
         
     }
 
@@ -79,6 +80,7 @@
 </style>
 
 <div class="login-container">
+     <img src="data:image/svg+xml;utf8,<svg fill='%23008CBA' width='100px' height='100px' viewBox='-0.72 -0.72 25.44 25.44' xmlns='http://www.w3.org/2000/svg' stroke='%23008CBA' stroke-width='0.00024000000000000003' transform='rotate(0)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round' stroke='%23CCCCCC' stroke-width='0.048'></g><g id='SVGRepo_iconCarrier'><path d='M3.105,12.447a1,1,0,0,0,1.45.385L6,11.869V21a1,1,0,0,0,1,1H17a1,1,0,0,0,1-1V11.869l1.445.963a1,1,0,0,0,1.45-.385l2-4a1,1,0,0,0-.114-1.072l-4-5A1,1,0,0,0,18,2H15a1,1,0,0,0-1,1,2,2,0,0,1-4,0A1,1,0,0,0,9,2H6a1,1,0,0,0-.781.375l-4,5a1,1,0,0,0-.114,1.072ZM6.48,4H8.127a4,4,0,0,0,7.746,0H17.52l3.3,4.125L19.612,10.54,17.555,9.168A1,1,0,0,0,16,10V20H8V10a1,1,0,0,0-1.555-.832L4.388,10.54,3.181,8.125Z'></path></g></svg>" alt="Login Image">
 
     <h1>Login</h1>
 
@@ -110,7 +112,7 @@
         </ul>
     {% endif %}     
         
-    Don't have an account yet? <a href="{% url 'main:register' %}" class="register-link">Register Now</a>
+    Belum punya Akun? <a href="{% url 'main:register' %}" class="register-link">Register Now</a>
 
 </div>
 

@@ -87,7 +87,7 @@
             border-bottom: 1px solid #ddd;
         }
 
-        /* Alternate row background color */
+        /* Alternate row background color (BONUS TUGAS 5)*/
         tr:nth-child(even) {
             background-color: #f2f2f2; 
         }
@@ -154,15 +154,40 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
             text-decoration: none;
+            margin-right: 5px;
+            max-width: ;
+        }
+
+        .custom-button-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E74C3C; /* Warna latar belakang merah */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
             margin-right: 10px;
         }
 
         .custom-button:hover {
             background-color: #005f7f;
         }
-
-    
         
+        .custom-button-delete:hover {
+            background-color: #C0392B; 
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
     </style>
 </head>
 
@@ -197,11 +222,12 @@
         <tr>
             <th>Name</th>
             <th>Price</th>
-            <th>Tambah dan Kurang</th>
+            <th>Add and Remove</th>
             <th>Amounts</th>
             <th>Description</th>
             <th>Date Added</th>
             <th>Delete</th>
+            <th>Edit</th>
         </tr>
 
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -233,10 +259,17 @@
             <td>
                 <form method="POST" action="{% url 'main:delete_product' product.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="custom-button" title="Hapus">
+                    <button type="submit" class="custom-button-delete" title="Hapus">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>
+            </td>
+            <td>
+                <a href="{% url 'main:edit_product' product.pk %}" class="custom-button" title="Edit">
+                    <div class="button-content">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                </a>
             </td>
         </tr>
         {% endfor %}
