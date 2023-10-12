@@ -94,6 +94,7 @@
 
         /* Styling the "Add New Product Button" */
         .center-button {
+            font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -136,9 +137,8 @@
             width: fit-content; 
     }
 
-        /* Hover effect on the Logout Button */
         .logout-button:hover {
-            background-color: #C0392B; /* Warna latar belakang saat hover */
+            background-color: #C0392B; 
         }
         /* Styling for the custom buttons */
         .custom-button {
@@ -155,7 +155,6 @@
             transition: background-color 0.3s ease;
             text-decoration: none;
             margin-right: 5px;
-            max-width: ;
         }
 
         .custom-button-delete {
@@ -188,14 +187,130 @@
             justify-content: center;
         }
 
+        /* Style untuk navbar */
+        nav {
+            background-color: #008CBA; /* Warna latar belakang navbar */
+            padding: 20px 20px; /* Padding atas dan bawah */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 25px; /* Sudut yang lebih bulat */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 70px; 
+            height: 80px; 
+            margin-right: 15px; 
+        }
+
+        .logo {
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px; /* Sudut yang lebih bulat */
+            transition: background-color 0.2s ease, color 0.2s ease; /* Efek hover */
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            display: inline;
+            margin: 0 15px; /* Jarak antara tautan */
+            text-decoration: none;
+            color: #fff; /* Warna teks */
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 10px; /* Sudut yang lebih bulat */
+            transition: background-color 0.2s ease, color 0.2s ease; /* Efek hover */
+        }
+
+
+        li:hover {
+            background-color: #005f7f;
+            color: #fff;
+            transition-delay: 0.2s; /* Delay saat hover */
+        }
+
     </style>
 </head>
 
 <body>
-    <h1>Selamat Datang {{name}} di Rumah Kaos</h1>
-    <h2>Katalog Kami</h2>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambahkan Produk Baru</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amounts" class="col-form-label">Amounts:</label>
+                            <input type="number" class="form-control" id="amounts" name="amounts"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="link_image" class="col-form-label">Image Link:</label>
+                            <input type="text" class="form-control" id="link_image" name="link_image"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <nav>
+        <div class="logo-container">
+            <img src="https://github.com/afsarakhaa/rumah-kaos/assets/122893320/1ec0cfb0-becc-4aaa-ab99-c4b060aa8c2d" alt="Rumah Kaos Logo">
+            <label class="logo">Rumah Kaos</label>
+        </div>
+            <ul>
+                <li>Beranda</li>
+                <li>Tentang Kami</li>
+                <li>Kontak</li>
+                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addProductButton">Add Product by AJAX</button></li>
+            </ul>
+    </nav>
+    
+
+    <h1 style="font-family: Arial, sans-serif; font-weight: bold;">Selamat Datang {{name}} di Rumah Kaos</h1>
     <br>
-    <div class="container">
+    <h2 style="font-family: Arial, sans-serif; width: 350px; font-weight: bold;">Katalog Kami</h2>
+
+    <!-- card product with AJAX -->
+    <div class="container" id="product-container"></div>
+
+    <!-- card product without AJAX -->
+    <!-- <div class="container">
         {% for product in products %}
         <div class="product-card">
             <div class="product-details">
@@ -214,11 +329,13 @@
             </div>
         </div>
         {% endfor %}
-    </div>
+    </div> -->
+    <br>
 
-    <h3>Terdapat {{ jumlah_produk }} katalog produk saat ini</h3>
+    <h3 style="font-family: Arial, sans-serif; font-weight: bold; margin-bottom: 20px;">Terdapat {{ jumlah_produk }} katalog produk saat ini</h3>
 
-    <table>
+    <!-- table product without AJAX -->
+    <!-- <table>
         <tr>
             <th>Name</th>
             <th>Price</th>
@@ -273,17 +390,147 @@
             </td>
         </tr>
         {% endfor %}
-    </table>
+    </table> -->
+
+    <!-- table product with AJAX -->
+    <table id="product_table"></table>
 
     <div class="center-button">
         <a href="{% url 'main:create_product' %}" class="rounded-button">Tambahkan Produk</a>
     </div>
     <br>
 
-    <h5 class="last-login">Sesi terakhir login: {{ last_login }}</h5>
+    <h5 class="last-login" style="font-family: Arial, sans-serif; font-weight: bold;">Sesi terakhir login: {{ last_login }}</h5>
     <div class="center-button">
         <a href="{% url 'main:logout' %}" class="logout-button">Logout</a>
     </div>
+
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+
+        async function refreshProducts() {
+            document.getElementById("product_table").innerHTML = ""
+            const products = await getProducts()
+            let htmlString = `<tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Add and Remove</th>
+                <th>Amounts</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                <th>Delete AJAX</th>
+            </tr>`
+            products.forEach((item) => {
+                htmlString += `\n<tr>
+                <td>${item.fields.name}</td>
+                <td>${item.fields.price}</td>
+                <td>
+                    <div style="display: flex; align-items: center; margin-right: ;">
+                        <a href="tambah_amount/${item.pk}">
+                            <button title="Tambah" class="custom-button">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        </a> 
+                        <br>
+                        <a href="kurang_amount/${item.pk}">
+                            <button title="Kurangi" class="custom-button">
+                                <i class="fas fa-minus-circle"></i>
+                            </button>
+                        </a> 
+                    </div>
+                </td>
+                <td style="display: flex; justify-content: center; margin-top: 24px ;">${item.fields.amounts}</td>
+                <td>${item.fields.description}</td>
+                <td>${item.fields.date_added}</td>
+                <td>
+                    <a href="delete_product/${item.pk}">
+                        <button class="custom-button-delete" title="Hapus">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </a> 
+                </td>
+                <td>
+                    <a href="edit-product/${item.pk}" class="custom-button" title="Edit">
+                        <div class="button-content">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <button title="Delete" class="custom-button-delete" onclick="deleteProduct(${item.pk})">
+                        Delete by AJAX
+                    </button>
+                </td>
+            </tr>` 
+            })
+            
+            document.getElementById("product_table").innerHTML = htmlString
+        }
+
+        async function updateProducts() {
+            const products = await getProducts();
+            const productContainer = document.getElementById("product-container");
+            productContainer.innerHTML = ""; 
+
+            products.forEach((item) => {
+                const productCard = document.createElement("div");
+                productCard.className = "product-card";
+                const productDetails = document.createElement("div");
+                productDetails.className = "product-details";
+
+                productDetails.innerHTML = `
+                    <div class="product-image">
+                        <img src="${item.fields.link_image}" alt="${item.fields.name}" width="300">
+                    </div>
+                    <p>${item.fields.name}</p>
+                    <p>IDR ${item.fields.price}</p>
+                    <p>Stock: ${item.fields.amounts}</p>
+                    <div class="warning" style="font-weight: bold;">
+                        <p>${item.fields.description}</p>
+                    </div>
+                `;
+
+                productCard.appendChild(productDetails);
+                productContainer.appendChild(productCard);
+            });
+        }
+
+        // SOAL BONUS : IMPLEMENTASI FUNGSI DELETE MENGGUNAKAN AJAX
+        function deleteProduct(productId) {
+            // Tampilkan pesan konfirmasi
+            if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+                fetch(`delete_product_ajax/${productId}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value,
+                    },
+                })
+                .then(refreshProducts)
+                .then(updateProducts);
+            }
+        }
+
+        function addProduct() {
+            fetch("{% url 'main:add_product_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            })
+            .then(refreshProducts)
+            .then(updateProducts)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        document.getElementById("button_add").onclick = addProduct
+
+        updateProducts();
+        refreshProducts()
+    </script>
 
 </body>
 </html>
