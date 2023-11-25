@@ -179,7 +179,7 @@ def create_product_flutter(request):
         new_product = Product.objects.create(
             user = request.user,
             name = data["name"],
-            price = int(data["price"]),
+            price = data["price"],
             description = data["description"],
             amounts = data["amounts"],
             link_image = data["link_image"],
