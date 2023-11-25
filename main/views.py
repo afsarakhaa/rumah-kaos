@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def show_main(request):
     products = Product.objects.filter(user=request.user)
     jumlah_produk = products.count()
